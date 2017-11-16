@@ -4,13 +4,15 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 
-public class ArrowTower extends Tower {
-	public ArrowTower(int row,int column){
-		this.price = 50;
-		this.damage = 10;
-		this.splashAttack = false;
-		this.range = 60;
-		this.fireRate = 10;
+public class IceTower extends Tower{
+	int duration = 10;
+	
+	public IceTower(int row,int column){
+		this.price = 80;
+		this.damage = 3;
+		this.splashAttack = true;
+		this.range = 55;
+		this.fireRate = 15;
 		this.fireCount = 0;
 		this.radius = 10;
 		this.row = row;
@@ -20,21 +22,12 @@ public class ArrowTower extends Tower {
 	}
 	
 	private void Attack() {
-		int nearestDistance = range;
-		Enemy lockedEnemy = null;;
 		for(Enemy enemy : GameLogic.getEnemy()) {
-			if(inRange(enemy)<=nearestDistance) {
-				nearestDistance = inRange(enemy);
-				lockedEnemy = enemy;
+			if(isInRange(enemy)) {
+				enemy.getHit(3);
+				enemy.freeze(duration);
 			}
-			
 		}
-		if(lockedEnemy != null) {
-			lockedEnemy.getHit(damage);
-			//System.out.println("attakc");
-		}
-		nearestDistance = range;
-		lockedEnemy = null;
 	}
 	
 	@Override
@@ -46,7 +39,6 @@ public class ArrowTower extends Tower {
 		}
 		fireCount ++;
 		//----------------------
-		
 	}
 	
 	@Override
@@ -55,7 +47,8 @@ public class ArrowTower extends Tower {
 		gc.setLineWidth(1.0);
 		gc.strokeArc(x-range, y-range, range*2, range*2, 0, 360, ArcType.OPEN);
 		//-----Draw radius----------
-		gc.setFill(Color.BLUE);
+		gc.setFill(Color.CYAN);
 		gc.fillArc(x-radius, y-radius, radius*2, radius*2, 0, 360, ArcType.OPEN);
 	}
+	
 }
