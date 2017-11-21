@@ -1,10 +1,13 @@
 package logic;
 
+import javafx.scene.image.ImageView;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
+import sharedObject.RenderableHolder;
 
 public class ArrowTower extends Tower {
+	private ImageView tower;
+	
 	public ArrowTower(int row,int column){
 		this.price = 50;
 		this.damage = 10;
@@ -17,6 +20,9 @@ public class ArrowTower extends Tower {
 		this.column = column;
 		this.x = Field.getPositionX(column);
 		this.y = Field.getPositionY(row);
+		this.angle = 0;
+		this.isDrew = false;
+		this.destroyed = false;
 	}
 	
 	private void Attack() {
@@ -31,7 +37,6 @@ public class ArrowTower extends Tower {
 		}
 		if(lockedEnemy != null) {
 			lockedEnemy.getHit(damage);
-			//System.out.println("attakc");
 		}
 		nearestDistance = range;
 		lockedEnemy = null;
@@ -46,16 +51,40 @@ public class ArrowTower extends Tower {
 		}
 		fireCount ++;
 		//----------------------
+		//----change angle to enemy-----
 		
+		//------------
 	}
 	
+
 	@Override
 	public void draw(GraphicsContext gc) {
 		//-----Draw Attack Range----
 		gc.setLineWidth(1.0);
 		gc.strokeArc(x-range, y-range, range*2, range*2, 0, 360, ArcType.OPEN);
-		//-----Draw radius----------
-		gc.setFill(Color.BLUE);
-		gc.fillArc(x-radius, y-radius, radius*2, radius*2, 0, 360, ArcType.OPEN);
+	}
+	
+	@Override
+	public ImageView drawImageView() {
+		tower = new ImageView(RenderableHolder.arrowTowerSprite);
+		tower.relocate(x-12.5, y-12.5);
+		tower.setRotate(angle);
+		isDrew = true;
+		return tower;
+	}
+	
+
+	
+	@Override
+	public void move() {
+		tower.setLayoutX(x-12.5);
+		tower.setLayoutY(y-12.5);
+		tower.setRotate(angle);
+	}
+	@Override
+	public void destroy() {
+		//tower.setVisible(false);
+		tower.setImage(null);
+		this.destroyed = true;
 	}
 }

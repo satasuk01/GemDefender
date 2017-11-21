@@ -1,5 +1,7 @@
 package logic;
 
+import javafx.scene.image.ImageView;
+
 public abstract class Tower extends Entity {
 	protected int row;
 	protected int column;
@@ -11,6 +13,8 @@ public abstract class Tower extends Entity {
 	protected boolean splashAttack;
 	protected int fireRate;
 	protected int fireCount;
+	protected double angle;
+	protected boolean isDrew;
 	protected int inRange(Enemy enemy){
 		return (int) Math.hypot(this.x-enemy.x, this.y-enemy.y);
 	}
@@ -23,8 +27,12 @@ public abstract class Tower extends Entity {
 	public int getColumn() {
 		return column;
 	}
-	public void update() {
-		
+	public boolean isDrew() {
+		return isDrew;
 	}
+	public abstract void update();
+	public abstract ImageView drawImageView();
+	public abstract void move();
+	public abstract void destroy();
 	
 }

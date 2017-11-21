@@ -1,11 +1,13 @@
 package logic;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.ArcType;
+import sharedObject.RenderableHolder;
 
 public class IceTower extends Tower{
 	int duration = 10;
+	private ImageView tower;
 	
 	public IceTower(int row,int column){
 		this.price = 80;
@@ -19,6 +21,8 @@ public class IceTower extends Tower{
 		this.column = column;
 		this.x = Field.getPositionX(column);
 		this.y = Field.getPositionY(row);
+		this.angle = 0;
+		this.isDrew = false;
 	}
 	
 	private void Attack() {
@@ -46,9 +50,26 @@ public class IceTower extends Tower{
 		//-----Draw Attack Range----
 		gc.setLineWidth(1.0);
 		gc.strokeArc(x-range, y-range, range*2, range*2, 0, 360, ArcType.OPEN);
-		//-----Draw radius----------
-		gc.setFill(Color.CYAN);
-		gc.fillArc(x-radius, y-radius, radius*2, radius*2, 0, 360, ArcType.OPEN);
 	}
 	
+	@Override
+	public ImageView drawImageView() {
+		tower = new ImageView(RenderableHolder.arrowTowerSprite);
+		tower.relocate(x-12.5, y-12.5);
+		tower.setRotate(angle);
+		isDrew = true;
+		return tower;
+	}
+	
+	@Override
+	public void move() {
+		tower.setLayoutX(x-12.5);
+		tower.setLayoutY(y-12.5);
+		tower.setRotate(angle);
+	}
+	@Override
+	public void destroy() {
+		tower.setImage(null);
+		this.destroyed = true;
+	}
 }

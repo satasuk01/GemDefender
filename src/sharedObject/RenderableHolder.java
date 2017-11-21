@@ -7,9 +7,7 @@ import java.util.List;
 
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
-import logic.Field;
-/*import logic.Mine;
-import logic.Tank;*/
+import logic.Tower;
 
 public class RenderableHolder {
 	private static final RenderableHolder instance = new RenderableHolder();
@@ -17,8 +15,10 @@ public class RenderableHolder {
 	private List<IRenderable> entities;
 	private Comparator<IRenderable> comparator;
 	public static Image mapSprite;
-	/*public static Image mineSprite;
-	public static AudioClip  explosionSound;*/
+	public static Image arrowTowerSprite;
+	public static Image bottomMenuSprite;
+	public static Image towerMenuSprite;
+	//public static AudioClip  explosionSound;
 
 	static {
 		loadResource();
@@ -38,34 +38,40 @@ public class RenderableHolder {
 	}
 
 	public static void loadResource() {
-		mapSprite = new Image("file:res/NewMap.png");
-		/*ClassLoader loader = ClassLoader.getSystemClassLoader();
-		mapSprite = new Image(loader.getSystemResourceAsStream("Map.png").toString());*/
-		//mineSprite = new Image(ClassLoader.getSystemResource("Mine.png").toString());
-		//explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
+		//mapSprite = new Image("file:res/NewMap.png");
+		mapSprite = new Image(ClassLoader.getSystemResource("NewMap.png").toString());
+		arrowTowerSprite = new Image(ClassLoader.getSystemResource("ArrowTower.png").toString());
+		bottomMenuSprite = new Image(ClassLoader.getSystemResource("BottomMenu.png").toString());
+		towerMenuSprite = new Image(ClassLoader.getSystemResource("TowerMenu.png").toString());
 	}
 
 	public void add(IRenderable entity) {
 		System.out.println("add");
 		entities.add(entity);
 		Collections.sort(entities, comparator);
-//		for(IRenderable x: entities){
-//			if(x instanceof Tank) System.out.println("tank");
-//			if(x instanceof Mine) System.out.println("mine");
-//			if(x instanceof Field) System.out.println("field");
-//			
-//		}
 		System.out.println(entity.toString()+"Added");
 	}
 
 	public void update() {
 		for (int i = entities.size() - 1; i >= 0; i--) {
-			if (entities.get(i).isDestroyed())
+			
+			if (entities.get(i).isDestroyed()) {
 				entities.remove(i);
+			}
+			
 		}
 	}
 
 	public List<IRenderable> getEntities() {
 		return entities;
+	}
+	public List<Tower> getTowers(){
+		List<Tower> towerList = new ArrayList<Tower>();
+		for(IRenderable entity: RenderableHolder.getInstance().getEntities()) {
+			if(entity instanceof Tower && entity.isDestroyed() == false && entity.isVisible()) {
+				towerList.add((Tower)entity);
+			}
+		}
+		return towerList;
 	}
 }

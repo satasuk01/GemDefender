@@ -9,7 +9,7 @@ public class GameLogic {
 	public static List<Entity> gameObjectContainer;
 	private Spawner spawner;
 	private Gem gem;
-	
+
 	public GameLogic() {
 		GameLogic.gameObjectContainer = new ArrayList<Entity>();
 		Field field = new Field();
@@ -19,7 +19,7 @@ public class GameLogic {
 		spawner = new Spawner(0,3);
 		addNewObject(spawner);
 		
-		//---------Test
+		//---------Test-------
 		Enemy enemy = new Enemy(1000,1.0);
 		addNewObject(enemy);
 		enemy.freeze(10);
@@ -28,9 +28,21 @@ public class GameLogic {
 		addNewObject(arrowTower);
 		IceTower iceTower = new IceTower(12,5);
 		addNewObject(iceTower);
+
+		
 		//-------------------
 		
 		System.out.println("add "+RenderableHolder.getInstance().toString());
+	}
+	
+	private void removeDestroyed() {
+		for (int i = gameObjectContainer.size() - 1; i >= 0; i--) {
+					
+					if (gameObjectContainer.get(i).isDestroyed()) {
+						gameObjectContainer.remove(i);
+					}
+					
+		}
 	}
 	
 	protected void addNewObject(Entity entity) {
@@ -60,9 +72,37 @@ public class GameLogic {
 	}
 	//TODO delete this var when the game is finished.
 	int counter = 0;
-	int top =180;
+	int top =150;
 	//---------------------------------------------
+	
+	//---------------DEBUG
+	private int nmax =200;
+	private int n=0;
+	private ArrowTower arrowTower2;
+	private boolean create = false;
+	private boolean destroy = false;
+	//-------------------
+	
 	public void logicUpdate() {
+		//----Remove Unused Items
+		removeDestroyed();
+		
+		
+		//---Debug----
+		if(n>nmax && !create) {
+			arrowTower2 = new ArrowTower(1,1);
+			addNewObject(arrowTower2);
+			create = true;
+		}
+		n++;
+		System.out.println(n);
+		
+		if(n>2*nmax && !destroy) {
+			arrowTower2.destroy(); //Error
+			destroy = false;
+		}
+		//------------
+		
 		//----Enemy Update----
 		for(Enemy enemy:getEnemy()) {
 			enemy.update();

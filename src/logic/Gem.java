@@ -29,6 +29,5 @@ public class Gem extends CollidableEntity{
 		gc.setStroke(Color.BLACK);
 		gc.setFill(Color.GREEN);
 		gc.fillArc(x-radius, y-radius, radius*2, radius*2, 0, 360, ArcType.OPEN);
-		//System.out.println("Draw Gem");
 	}
 }

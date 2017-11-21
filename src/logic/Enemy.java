@@ -1,6 +1,7 @@
 package logic;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.scene.text.Font;
@@ -13,8 +14,9 @@ public class Enemy extends CollidableEntity {
 	private double speed;
 	private boolean freezed = false;
 	private int freezedDuration = 0;
-	private int angle = 0;
+	//private int angle = 0;
 	private int stage = 1;
+	private Image sprite;
 	
 	public Enemy(int maxHp,double normalSpeed) { //speed = 1.5 hp=100
 		speed = normalSpeed;
@@ -57,6 +59,20 @@ public class Enemy extends CollidableEntity {
 		
 		if(stage == 4) {
 			this.x += speed;
+			if(x>Field.getPositionX(9)){
+				this.x = Field.getPositionX(9);
+				this.y = Field.getPositionY(3);
+				stage = 5;
+			}
+		}
+		
+		if(stage == 5) {
+			this.y += speed;
+			if(y>Field.getPositionY(16)){
+				this.x = Field.getPositionX(9);
+				this.y = Field.getPositionY(16);
+				stage = 6;
+			}
 		}
 	}
 	public void getHit(int damage) {

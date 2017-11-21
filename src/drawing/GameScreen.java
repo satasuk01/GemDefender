@@ -3,6 +3,7 @@ package drawing;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import logic.Tower;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
@@ -22,5 +23,6 @@ public class GameScreen extends Canvas{
 				entity.draw(gc);
 			}
 		}
+		
 	}
 }
