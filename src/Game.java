@@ -1,6 +1,7 @@
 
 import drawing.GameScreen;
 import drawing.PaneForRenderImageViews;
+import input.InputUtility;
 /*import input.InputUtility;*/
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -45,6 +46,8 @@ public class Game extends Application {
 		GameLogic logic = new GameLogic();
 		GameScreen gameScreen = new GameScreen(750, 500);
 		PaneForRenderImageViews pr = new PaneForRenderImageViews(750,500);
+		InputUtility.mouseEventOnField(pr);
+		
 		root.getChildren().add(gameScreen);
 		root.getChildren().add(pr);
 		//gameScreen.requestFocus();

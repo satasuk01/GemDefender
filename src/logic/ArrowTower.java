@@ -1,6 +1,7 @@
 package logic;
 
 import javafx.scene.image.ImageView;
+import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.ArcType;
 import sharedObject.RenderableHolder;
@@ -23,6 +24,7 @@ public class ArrowTower extends Tower {
 		this.angle = 0;
 		this.isDrew = false;
 		this.destroyed = false;
+		this.eventAdded = false;
 	}
 	
 	private void Attack() {
@@ -44,6 +46,7 @@ public class ArrowTower extends Tower {
 	
 	@Override
 	public void update() {
+		
 		//----------Attack-------
 		if(fireCount > fireRate) {
 			Attack();
@@ -86,5 +89,9 @@ public class ArrowTower extends Tower {
 		//tower.setVisible(false);
 		tower.setImage(null);
 		this.destroyed = true;
+	}
+	@Override
+	public ImageView getImageView() {
+		return tower;
 	}
 }

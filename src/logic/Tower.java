@@ -5,7 +5,8 @@ import javafx.scene.image.ImageView;
 public abstract class Tower extends Entity {
 	protected int row;
 	protected int column;
-	
+
+	protected boolean eventAdded;
 	protected int price;
 	protected int radius;
 	protected int range;
@@ -30,9 +31,16 @@ public abstract class Tower extends Entity {
 	public boolean isDrew() {
 		return isDrew;
 	}
+	public boolean isEventAdded() {
+		return eventAdded;
+	}
+	public int getPrice() {
+		return price;
+	}
 	public abstract void update();
 	public abstract ImageView drawImageView();
 	public abstract void move();
 	public abstract void destroy();
+	public abstract ImageView getImageView();
 	
 }

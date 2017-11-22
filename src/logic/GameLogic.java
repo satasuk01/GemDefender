@@ -95,7 +95,7 @@ public class GameLogic {
 			create = true;
 		}
 		n++;
-		System.out.println(n);
+		//System.out.println(n);
 		
 		if(n>2*nmax && !destroy) {
 			arrowTower2.destroy(); //Error

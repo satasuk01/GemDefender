@@ -23,6 +23,7 @@ public class IceTower extends Tower{
 		this.y = Field.getPositionY(row);
 		this.angle = 0;
 		this.isDrew = false;
+		this.eventAdded = false;
 	}
 	
 	private void Attack() {
@@ -71,5 +72,9 @@ public class IceTower extends Tower{
 	public void destroy() {
 		tower.setImage(null);
 		this.destroyed = true;
+	}
+	@Override
+	public ImageView getImageView() {
+		return tower;
 	}
 }

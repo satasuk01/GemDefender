@@ -1,5 +1,6 @@
 package drawing;
 
+import input.InputUtility;
 import javafx.scene.layout.Pane;
 import logic.Tower;
 import sharedObject.RenderableHolder;
@@ -14,6 +15,8 @@ public class PaneForRenderImageViews extends Pane {
 	public void paintImageView() {
 		for (Tower entity : RenderableHolder.getInstance().getTowers()) {
 			// System.out.println(entity.getZ());
+			
+			//--------Draw the tower on the first time------
 			if (entity.isVisible() && !entity.isDestroyed() && !entity.isDrew()) {
 				try {
 					this.getChildren().add(entity.drawImageView());
@@ -25,8 +28,17 @@ public class PaneForRenderImageViews extends Pane {
 					
 				}
 			}
+			//----------------------------------------------
 			
-			entity.move();
+			//---------Add event handler for Tower
+			if (entity.isVisible() && !entity.isDestroyed() && !entity.isEventAdded()) {
+				try {
+					InputUtility.addImageViewEvents(entity);
+				}
+				catch(Exception e) {
+				}
+			}
+			//-------------------------------------
 			
 		}
 	}
