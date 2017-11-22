@@ -1,13 +1,17 @@
 package logic;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.ArcType;
+import javafx.scene.shape.Rectangle;
+import menu.BottomMenu;
+import menu.TowerMenu;
 import sharedObject.RenderableHolder;
 
 public class ArrowTower extends Tower {
 	private ImageView tower;
-	
 	public ArrowTower(int row,int column){
 		this.price = 50;
 		this.damage = 10;
@@ -69,6 +73,14 @@ public class ArrowTower extends Tower {
 		tower = new ImageView(RenderableHolder.arrowTowerSprite);
 		tower.relocate(x-12.5, y-12.5);
 		tower.setRotate(angle);
+		tower.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent t) {   
+				if(TowerMenu.getBottom()==3) {
+					destroy();
+					TowerMenu.setBottom(0);
+				}
+			}
+		});
 		isDrew = true;
 		return tower;
 	}

@@ -3,16 +3,20 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import Game.Game;
+import javafx.application.Platform;
+import menu.BottomMenu;
+import menu.TowerMenu;
 import sharedObject.RenderableHolder;
 //TODO make it private and create a singleton pattern(create one instance)
-public class GameLogic {
+public class GameLogic  {
 	public static List<Entity> gameObjectContainer;
 	private Spawner spawner;
 	private Gem gem;
-
+	private Field field;
 	public GameLogic() {
 		GameLogic.gameObjectContainer = new ArrayList<Entity>();
-		Field field = new Field();
+		field = new Field();
 		RenderableHolder.getInstance().add(field);
 		gem = new Gem(19,27);
 		addNewObject(gem);
@@ -20,14 +24,14 @@ public class GameLogic {
 		addNewObject(spawner);
 		
 		//---------Test-------
-		Enemy enemy = new Enemy(1000,1.0);
-		addNewObject(enemy);
-		enemy.freeze(10);
+		//Enemy enemy = new Enemy(1000,1.0);
+		//addNewObject(enemy);
+		//enemy.freeze(10);
 		
-		ArrowTower arrowTower = new ArrowTower(16,4);
-		addNewObject(arrowTower);
-		IceTower iceTower = new IceTower(12,5);
-		addNewObject(iceTower);
+		//ArrowTower arrowTower = new ArrowTower(16,4);
+		//addNewObject(arrowTower);
+		//IceTower iceTower = new IceTower(12,5);
+		//addNewObject(iceTower);
 
 		
 		//-------------------
@@ -39,15 +43,15 @@ public class GameLogic {
 		for (int i = gameObjectContainer.size() - 1; i >= 0; i--) {
 					
 					if (gameObjectContainer.get(i).isDestroyed()) {
-						gameObjectContainer.remove(i);
+						//gameObjectContainer.remove(i);
 					}
 					
 		}
 	}
 	
-	protected void addNewObject(Entity entity) {
+	protected static void addNewObject(Entity entity) {
 		gameObjectContainer.add(entity);
-
+		
 		//TODO add these into RenderableHolder
 		RenderableHolder.getInstance().add(entity);
 	}
@@ -85,21 +89,20 @@ public class GameLogic {
 	
 	public void logicUpdate() {
 		//----Remove Unused Items
-		removeDestroyed();
+		//removeDestroyed();
 		
 		
 		//---Debug----
-		if(n>nmax && !create) {
-			arrowTower2 = new ArrowTower(1,1);
-			addNewObject(arrowTower2);
-			create = true;
+		if(TowerMenu.getBottom()==1) {
+			BuildTower bt = new BuildTower(1);
+			addNewObject(bt);
+			TowerMenu.setBottom(0);
 		}
-		n++;
-		System.out.println(n);
 		
-		if(n>2*nmax && !destroy) {
-			arrowTower2.destroy(); //Error
-			destroy = false;
+		if(TowerMenu.getBottom()==2) {
+			BuildTower bt = new BuildTower(2);
+			addNewObject(bt);
+			TowerMenu.setBottom(0);
 		}
 		//------------
 		

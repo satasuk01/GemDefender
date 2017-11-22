@@ -1,6 +1,7 @@
 package logic;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 
 public abstract class Tower extends Entity {
 	protected int row;
@@ -32,6 +33,7 @@ public abstract class Tower extends Entity {
 	}
 	public abstract void update();
 	public abstract ImageView drawImageView();
+
 	public abstract void move();
 	public abstract void destroy();
 	

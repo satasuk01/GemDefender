@@ -1,14 +1,18 @@
 package drawing;
 
+import javafx.application.Platform;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import logic.Tower;
 import sharedObject.RenderableHolder;
 
 //This should be call every time when add the tower or sell it
-
 public class PaneForRenderImageViews extends Pane {
 	public PaneForRenderImageViews(int width,int height) {
 		this.setPrefSize(width, height);
+		
 	}
 	
 	public void paintImageView() {

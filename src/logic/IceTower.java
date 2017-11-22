@@ -1,14 +1,19 @@
 package logic;
 
+import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.ArcType;
+import javafx.scene.shape.Rectangle;
+import menu.BottomMenu;
+import menu.TowerMenu;
 import sharedObject.RenderableHolder;
 
 public class IceTower extends Tower{
 	int duration = 10;
 	private ImageView tower;
-	
+	private Rectangle box;
 	public IceTower(int row,int column){
 		this.price = 80;
 		this.damage = 3;
@@ -57,6 +62,14 @@ public class IceTower extends Tower{
 		tower = new ImageView(RenderableHolder.arrowTowerSprite);
 		tower.relocate(x-12.5, y-12.5);
 		tower.setRotate(angle);
+		tower.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent t) {      	
+				if(TowerMenu.getBottom()==3) {
+					destroy();
+					TowerMenu.setBottom(0);
+				}
+			}
+		});
 		isDrew = true;
 		return tower;
 	}
@@ -70,6 +83,10 @@ public class IceTower extends Tower{
 	@Override
 	public void destroy() {
 		tower.setImage(null);
+		
 		this.destroyed = true;
 	}
+
+
+	
 }

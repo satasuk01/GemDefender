@@ -1,3 +1,4 @@
+package Game;
 
 import drawing.GameScreen;
 import drawing.PaneForRenderImageViews;
@@ -15,7 +16,7 @@ import sharedObject.RenderableHolder;
 
 public class Game extends Application {
 
-	@Override
+	
 	public void start(Stage stage) {
 		//---Base---
 		GridPane base = new GridPane();
@@ -25,7 +26,6 @@ public class Game extends Application {
 		base.setPrefHeight(600);
 		base.setMaxHeight(600);
 		base.setMinHeight(600);
-		
 		GridPane topbase = new GridPane();
 		GridPane bottombase = new GridPane();
 		base.add(topbase, 0, 0);
@@ -68,13 +68,14 @@ public class Game extends Application {
 		
 		
 		//---Add to base
-
 		Scene scene = new Scene(base);
+
 		stage.setScene(scene);
 		stage.setTitle("Gem Defender");
 		stage.show();
 	}
-
+	
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
