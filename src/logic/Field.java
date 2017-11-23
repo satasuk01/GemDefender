@@ -2,6 +2,7 @@ package logic;
 
 import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -44,6 +45,7 @@ public class Field implements IRenderable{
 	public void draw(GraphicsContext gc) {
 		Image img = RenderableHolder.mapSprite;
 		gc.drawImage(img, 0, 0);
-		
 	}
+	
+	
 }

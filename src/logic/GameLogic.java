@@ -119,7 +119,7 @@ public class GameLogic  {
 		
 		//---Test group of enemies--- PLS DELETE
 		if(counter>top) {
-			addNewObject(new Enemy(500,1));
+			addNewObject(new Enemy(500,10));
 			counter = 0;
 		}
 		counter ++;
