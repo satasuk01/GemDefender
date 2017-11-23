@@ -46,7 +46,7 @@ public class RenderableHolder {
 		//mapSprite = new Image("file:res/NewMap.png");
 		mapSprite = new Image(ClassLoader.getSystemResource("NewMap.png").toString());
 		arrowTowerSprite = new Image(ClassLoader.getSystemResource("ArrowTower.png").toString());
-		//iceTowerSprite = new Image(ClassLoader.getSystemResource("IceTower.png").toString());
+		iceTowerSprite = new Image(ClassLoader.getSystemResource("IceTower.png").toString());
 		bottomMenuSprite = new Image(ClassLoader.getSystemResource("BottomMenu.png").toString());
 		towerMenuSprite = new Image(ClassLoader.getSystemResource("TowerMenu.png").toString());
 		sellButton = new Image(ClassLoader.getSystemResource("remove.png").toString());

@@ -160,9 +160,11 @@ public class Enemy extends CollidableEntity {
 		//System.out.println("Take damage");
 	}
 	public void freeze(int duration) {
-		speed = normalSpeed/5;
-		freezed = true;
-		freezedDuration=duration;
+		if(!freezed) {
+			speed = normalSpeed/5;
+			freezed = true;
+			freezedDuration=duration;
+		}
 	}
 	public void update() {
 		//Decrease freeze time
@@ -195,7 +197,7 @@ public class Enemy extends CollidableEntity {
 		gc.setFill(Color.GREEN);
 		gc.fillText(Integer.toString(hp), x-radius, y-radius + 12);*/
 		if(hp>0) {
-			gc.setFill(Color.rgb(90, (int)(255 *(double)(hp)/(double)(maxHp)), 0));
+			gc.setFill(Color.rgb((int)(255 *(1-(double)(hp)/(double)(maxHp))), (int)(255 *(double)(hp)/(double)(maxHp)), 0));
 			gc.fillRect(x-12.5, y-16, 25*(double)(hp)/(double)(maxHp), 3);
 		}
 		//-------------------------

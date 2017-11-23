@@ -55,7 +55,7 @@ public class IceTower extends Tower{
 	
 	@Override
 	public ImageView drawImageView() {
-		tower = new ImageView(RenderableHolder.arrowTowerSprite);
+		tower = new ImageView(RenderableHolder.iceTowerSprite);
 		tower.relocate(x-12.5, y-12.5);
 		tower.setRotate(angle);
 		isDrew = true;
