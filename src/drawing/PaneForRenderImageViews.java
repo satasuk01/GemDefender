@@ -39,7 +39,7 @@ public class PaneForRenderImageViews extends Pane {
 				}
 			}
 			//-------------------------------------
-			
+			entity.move();
 		}
 	}
 }

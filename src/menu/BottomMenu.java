@@ -26,9 +26,7 @@ public class BottomMenu extends StackPane { //add GridPane or maybe use stackpan
 		//-----Menu (GridPane)
 		GridPane menu = new GridPane();
 	
-		Button sellButton = new Button("sell");
-		InputUtility.setSellButton(sellButton);
-		menu.add(sellButton, 0, 0);
+		
 		//-----------------
 		this.getChildren().add(menu);
 	}

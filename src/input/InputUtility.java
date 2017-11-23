@@ -1,6 +1,5 @@
 package input;
 
-import java.util.ArrayList;
 
 import core.GameCore;
 import drawing.PaneForRenderImageViews;
@@ -8,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import logic.Tower;
 
@@ -36,27 +34,47 @@ public class InputUtility {
 		tower.getImageView().setOnMousePressed(hover);
 	}
 	
-	public static void setSellButton(Button btn) {
+	public static void setSellButton(ImageView btn) {
 		
-		btn.setOnAction(new EventHandler<ActionEvent>(){
+		EventHandler<MouseEvent> hover = new EventHandler<MouseEvent>(){
+			
 			@Override
-			public void handle(ActionEvent event) {
-				GameCore.sellTower();
-				System.out.println("sell");
+		    public void handle(MouseEvent event) {
+				
+				if(event.getEventType() == MouseEvent.MOUSE_PRESSED) {
+					GameCore.sellTower();
+					System.out.println("sell");;
+				}
+				
 			}
-		});
-		
+		};
+		btn.setOnMousePressed(hover);
 	}
 	
-	public static void setBuyButton(Button btn,int status) {
+	
+	public static void setBuyButton(ImageView btn,int status) {
 		
-		btn.setOnAction(new EventHandler<ActionEvent>(){
+		/*btn.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent event) {
 				GameCore.setBuyStatus(status);
 				System.out.println("buy :"+status);
 			}
-		});
+		});*/
+		
+		EventHandler<MouseEvent> hover = new EventHandler<MouseEvent>(){
+			
+			@Override
+		    public void handle(MouseEvent event) {
+				
+				if(event.getEventType() == MouseEvent.MOUSE_PRESSED) {
+					GameCore.setBuyStatus(status);
+					System.out.println("buy :"+status);
+				}
+				
+			}
+		};
+		btn.setOnMousePressed(hover);
 		
 	}
 	
