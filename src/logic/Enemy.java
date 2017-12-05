@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import sharedObject.RenderableHolder;
 
 public class Enemy extends CollidableEntity {
 	private int maxHp;
@@ -185,22 +186,36 @@ public class Enemy extends CollidableEntity {
 		move();
 	}
 	
+	private int animationFrame=0;
+	
 	@Override
 	public void draw(GraphicsContext gc) {
 		//-----Draw radius----------
-		gc.setFill(Color.RED);
+		/*gc.setFill(Color.RED);
 				
-		gc.fillArc(x-radius, y-radius, radius*2, radius*2, 0, 360, ArcType.OPEN);
+		gc.fillArc(x-radius, y-radius, radius*2, radius*2, 0, 360, ArcType.OPEN);*/
 		//-----Draw HP--------------
 		/*Font font = Font.font("Times New Roman",FontWeight.LIGHT,10);
 		gc.setFont(font);
 		gc.setFill(Color.GREEN);
 		gc.fillText(Integer.toString(hp), x-radius, y-radius + 12);*/
-		if(hp>0) {
+		if(hp>0&&hp!=this.maxHp) {
 			gc.setFill(Color.rgb((int)(255 *(1-(double)(hp)/(double)(maxHp))), (int)(255 *(double)(hp)/(double)(maxHp)), 0));
 			gc.fillRect(x-12.5, y-16, 25*(double)(hp)/(double)(maxHp), 3);
 		}
 		//-------------------------
+		//---Draw Image----
+		if(animationFrame%90<30) {
+			gc.drawImage(RenderableHolder.slimeSprite[0], this.x-12.5, this.y-12.5);
+		}else if(animationFrame%90<60 && animationFrame%90>=30) {
+			gc.drawImage(RenderableHolder.slimeSprite[1], this.x-12.5, this.y-12.5);
+		}else {
+			gc.drawImage(RenderableHolder.slimeSprite[2], this.x-12.5, this.y-12.5);
+		}
+		animationFrame++;
+		
+		
+		//------------
 		
 	}
 	

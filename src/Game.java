@@ -52,8 +52,7 @@ public class Game extends Application {
 		root.getChildren().add(pr);
 		//gameScreen.requestFocus();
 		
-
-		
+		//----Animation Timer----------
 		AnimationTimer animation = new AnimationTimer() {
 			public void handle(long now) {
 				gameScreen.paintComponent();
@@ -64,6 +63,7 @@ public class Game extends Application {
 			}
 		};
 		animation.start();
+		//------------------------------
 		
 		topbase.add(root, 0, 0);
 		//------------------------

@@ -23,6 +23,11 @@ public class RenderableHolder {
 	public static Image arrowButton;
 	public static Image iceButton;
 	public static Image sellButton;
+	
+	private static Image slime0;
+	private static Image slime1;
+	private static Image slime2;
+	public static Image[] slimeSprite;
 	//public static AudioClip  explosionSound;
 
 	static {
@@ -52,6 +57,14 @@ public class RenderableHolder {
 		sellButton = new Image(ClassLoader.getSystemResource("remove.png").toString());
 		iceButton = new Image(ClassLoader.getSystemResource("IceButton.png").toString());
 		arrowButton = new Image(ClassLoader.getSystemResource("ArrowButton.png").toString());
+		
+		slime0 = new Image(ClassLoader.getSystemResource("slime0.png").toString());
+		slime1 = new Image(ClassLoader.getSystemResource("slime1.png").toString());
+		slime2 = new Image(ClassLoader.getSystemResource("slime2.png").toString());
+		slimeSprite = new Image[3];
+		slimeSprite[0] = slime0;
+		slimeSprite[1] = slime1;
+		slimeSprite[2] = slime2;
 	}
 
 	public void add(IRenderable entity) {

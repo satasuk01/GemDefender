@@ -18,19 +18,7 @@ public class GameLogic {
 		addNewObject(gem);
 		spawner = new Spawner(0,3);
 		addNewObject(spawner);
-		
-		//---------Test-------
-		Enemy enemy = new Enemy(1000,1.0);
-		addNewObject(enemy);
-		enemy.freeze(10);
-		
-		ArrowTower arrowTower = new ArrowTower(16,4);
-		addNewObject(arrowTower);
-		IceTower iceTower = new IceTower(12,5);
-		addNewObject(iceTower);
-
-		
-		//-------------------
+	
 		
 		System.out.println("add "+RenderableHolder.getInstance().toString());
 	}
@@ -73,35 +61,14 @@ public class GameLogic {
 	//TODO delete this var when the game is finished.
 	int counter = 0;
 	int top =150;
+	int tick =0;
 	//---------------------------------------------
 	
-	//---------------DEBUG
-	private int nmax =200;
-	private int n=0;
-	private ArrowTower arrowTower2;
-	private boolean create = false;
-	private boolean destroy = false;
-	//-------------------
 	
 	public void logicUpdate() {
 		//----Remove Unused Items
 		removeDestroyed();
 		
-		
-		//---Debug----
-		if(n>nmax && !create) {
-			arrowTower2 = new ArrowTower(1,1);
-			addNewObject(arrowTower2);
-			create = true;
-		}
-		n++;
-		//System.out.println(n);
-		
-		if(n>2*nmax && !destroy) {
-			arrowTower2.destroy(); //Error
-			destroy = false;
-		}
-		//------------
 		
 		//----Enemy Update----
 		for(Enemy enemy:getEnemy()) {
@@ -116,10 +83,11 @@ public class GameLogic {
 		
 		//---Test group of enemies--- PLS DELETE
 		if(counter>top) {
-			addNewObject(new Enemy(100,1));
+			addNewObject(new Enemy(100+(int)(tick/50),1));
 			counter = 0;
 		}
 		counter ++;
+		tick++;
 		//---------------------------
 	}
 }
